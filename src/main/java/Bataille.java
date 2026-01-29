@@ -1,6 +1,22 @@
 import java.util.Scanner;
 
 public class Bataille {
+    private static final int MAX_ITEMS = 100;
+    private static String[] storedItems = new String[MAX_ITEMS];
+    private static int count = 0;
+
+    public static void printInput(String[] input) {
+        System.out.println("\n____________________________________________________________");
+        if (count == 0) {
+            System.out.println("No items stored yet.");
+        } else {
+            for (int i = 0; i < count; i++) {
+                System.out.println(" " + (i + 1) + ". " + storedItems[i]);
+            }
+            System.out.println("____________________________________________________________");
+        }
+    }
+
     public static void main(String[] args) {
         boolean active = true;
         Scanner in = new Scanner(System.in);
@@ -26,9 +42,13 @@ public class Bataille {
                 System.out.println("Goodbye.");
                 System.out.println("____________________________________________________________");
                 active = false;
+            } else if (input.equalsIgnoreCase("list")) {
+                printInput(storedItems);
             } else {
+                storedItems[count] = input;
+                count ++;
                 System.out.println("____________________________________________________________");
-                System.out.println(" " + input);
+                System.out.println(" added: " + input);
                 System.out.println("____________________________________________________________");
             }
         }
