@@ -1,7 +1,7 @@
-public class BadBuddy {
+public class Bataille{
     public static void main(String[] args) {
         System.out.println("____________________________________________________________");
-        System.out.println(" Hello! I'm BadBuddy");
+        System.out.println(" Hello! I'm Bataille");
         System.out.println(" What can I do for you?");
         System.out.println("____________________________________________________________");
 
