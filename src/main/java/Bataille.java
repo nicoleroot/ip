@@ -1,16 +1,40 @@
 import java.util.Scanner;
 
+class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "[X]" : "[ ]");
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    public void markAsUndone() {
+        this.isDone = false;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+}
+
 public class Bataille {
     private static final int MAX_ITEMS = 100;
-    private static String[] storedItems = new String[MAX_ITEMS];
-    private static boolean[] completed = new boolean[MAX_ITEMS];
+    private static Task[] storedTasks = new Task[MAX_ITEMS];
     private static int count = 0;
 
-    static {
-        for (int i = 0; i < MAX_ITEMS; i ++) {
-            completed[i] = false;
-        }
-    }
     public static void printInput() {
         System.out.println("\n____________________________________________________________");
         System.out.println(" Sacred Taboos in your ledger: ");
@@ -18,8 +42,9 @@ public class Bataille {
             System.out.println(" The void stares back at you. No truths dared spoken yet.");
         } else {
             for (int i = 0; i < count; i++) {
-                String status = completed[i] ? "[X]" : "[ ]";
-                System.out.println(" " + (i + 1) + "." + status + storedItems[i]);
+                Task task = storedTasks[i];
+                String status = task.getStatusIcon();
+                System.out.println(" " + (i + 1) + "." + status + " " + task.getDescription());
             }
             System.out.println("____________________________________________________________");
         }
@@ -32,16 +57,22 @@ public class Bataille {
             System.out.println("____________________________________________________________");
             return;
         }
-        completed[index - 1] = done;
-        String status = done ? "[X]" : "[ ]";
+
+        Task task = storedTasks[index - 1];
+        if (done) {
+            task.markAsDone();
+        } else {
+            task.markAsUndone();
+        }
         String action = done ? "profaned" : "restored to sacred";
+        String status = "[" + task.getStatusIcon() + "]";
         String philosophical = done ?
                 "Another ritual completed. Another boundary crossed." :
                 "The task returns to its potential state. Unfinished, like all existence.";
 
         System.out.println("\n____________________________________________________________");
         System.out.println(" The limit has been crossed! This truth is now " + action + ": ");
-        System.out.println("   " + status + " " + storedItems[index - 1]);
+        System.out.println("   " + status + " " + task.getDescription());
         System.out.println(" " + philosophical);
         System.out.println("____________________________________________________________");
     }
@@ -62,6 +93,7 @@ public class Bataille {
         System.out.println("The sacred is not what you worship, but what you violate.");
         System.out.println("Speak to me of your darkest truths...");
 
+        System.out.println("\n'list' - View all taboos; 'profane X' - Violate taboo X; 'restore X' - Restore taboo X");
         while (active) {
             String input = in.nextLine().trim();
 
@@ -90,7 +122,8 @@ public class Bataille {
                 }
             } else {
                 if (count < MAX_ITEMS) {
-                    storedItems[count] = input;
+                    Task newTask = new Task(input);
+                    storedTasks[count] = newTask;
                     count++;
                     System.out.println("____________________________________________________________");
                     System.out.println(" Taboo inscribed: " + input);
