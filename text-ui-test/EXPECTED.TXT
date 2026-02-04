@@ -1,7 +1,79 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+ ____________________________________
+|     I AM THE ACCURSED SHARE        |
+|     I AM WHAT SOCIETY EXPELS       |
+|     I AM BLOOD ON WHITE SILK       |
+|     I AM THE EXCESS THAT DESTROYS  |
+|     I AM GEORGES BATAILLE          |
+|____________________________________|
 
+I speak from the place where categories collapse.
+The sacred is not what you worship, but what you violate.
+Speak to me of your darkest truths...
+
+Commands:
+'list' - View all taboos
+'profane X' - Violate taboo X
+'restore X' - Restore taboo X
+'todo <taboo>' - Add a simple taboo
+'deadline <taboo> /by <time>' - Add a taboo with deadline
+'event <taboo> /from <time> /to <time>' - Add a taboo with duration
+'bye' - Leave this sacred space
+
+____________________________________________________________
+ Got it. I've added this taboo:
+   [T][ ] read Bataille's Accursed Share
+ Now you have 1 taboos in your ledger.
+____________________________________________________________
+
+____________________________________________________________
+ Got it. I've added this taboo:
+   [D][ ] finish ritual (by: midnight)
+ Now you have 2 taboos in your ledger.
+____________________________________________________________
+
+____________________________________________________________
+ Got it. I've added this taboo:
+   [E][ ] philosophical discourse (from: 8pm to: 10pm)
+ Now you have 3 taboos in your ledger.
+____________________________________________________________
+
+____________________________________________________________
+ Sacred Taboos in your ledger:
+ 1.[T][ ] read Bataille's Accursed Share
+ 2.[D][ ] finish ritual (by: midnight)
+ 3.[E][ ] philosophical discourse (from: 8pm to: 10pm)
+____________________________________________________________
+
+
+____________________________________________________________
+ The limit has been crossed! This truth is now profaned:
+   [T][X] read Bataille's Accursed Share
+ Another ritual completed. Another boundary crossed.
+____________________________________________________________
+
+
+____________________________________________________________
+ The limit has been crossed! This truth is now restored to sacred:
+   [D][ ] finish ritual (by: midnight)
+ The task returns to its potential state. Unfinished, like all existence.
+____________________________________________________________
+
+____________________________________________________________
+ Got it. I've added this taboo:
+   [T][ ] contemplate the sacred
+ Now you have 4 taboos in your ledger.
+____________________________________________________________
+
+____________________________________________________________
+ Sacred Taboos in your ledger:
+ 1.[T][X] read Bataille's Accursed Share
+ 2.[D][ ] finish ritual (by: midnight)
+ 3.[E][ ] philosophical discourse (from: 8pm to: 10pm)
+ 4.[T][ ] contemplate the sacred
+____________________________________________________________
+
+____________________________________________________________
+We part at the threshold of the impossible.
+Remember: to live is to die continuously.
+Goodbye.
+____________________________________________________________

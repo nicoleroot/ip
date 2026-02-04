@@ -1,0 +1,9 @@
+todo read Bataille's Accursed Share
+deadline finish ritual /by midnight
+event philosophical discourse /from 8pm /to 10pm
+list
+profane 1
+restore 2
+todo contemplate the sacred
+list
+bye
