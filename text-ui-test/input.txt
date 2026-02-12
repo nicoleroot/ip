@@ -1,4 +1,4 @@
-todo read Bataille's Accursed Share
+todo read bataille.ui.Bataille's Accursed Share
 deadline finish ritual /by midnight
 event philosophical discourse /from 8pm /to 10pm
 list
