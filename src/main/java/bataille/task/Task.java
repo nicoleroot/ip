@@ -1,3 +1,5 @@
+package bataille.task;
+
 public class Task {
 
 	protected String description;

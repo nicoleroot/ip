@@ -1,4 +1,12 @@
+package bataille.ui;
+
 import java.util.Scanner;
+
+import bataille.task.Task;
+import bataille.task.Deadline;
+import bataille.task.Event;
+import bataille.task.ToDo;
+import bataille.exception.BatailleException;
 
 public class Bataille {
     private static final int MAX_ITEMS = 100;
@@ -55,7 +63,7 @@ public class Bataille {
         printLine();
     }
 
-    public static void markTask(int index, boolean isDone) throws BatailleException{
+    public static void markTask(int index, boolean isDone) throws BatailleException {
         if (index < 1 || index > count) {
             throw new BatailleException("No such taboo exists in the sacred order. The number must be between 1 and " + count + ".");
         }
@@ -129,7 +137,7 @@ public class Bataille {
         addTask(new Deadline(description, by));
     }
 
-    public static void handleEvent(String input) throws BatailleException{
+    public static void handleEvent(String input) throws BatailleException {
         int eventLength = 6;
         if (!input.contains("/from") || !input.contains("/to")) {
             throw new BatailleException("An event requires a taboo, a beginning, and an end.\n" +
@@ -182,11 +190,11 @@ public class Bataille {
         }
     }
 
-    public static void handleError(String input) throws BatailleException{
+    public static void handleError(String input) throws BatailleException {
         throw new BatailleException("I don't understand this ritual. Speak clearly.");
     }
 
-    public static void processCommand(String input) throws BatailleException{
+    public static void processCommand(String input) throws BatailleException {
         if (input.equalsIgnoreCase("list")) {
             printInput();
         } else if (input.toLowerCase().startsWith("profane ")) {

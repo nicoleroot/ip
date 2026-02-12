@@ -21,7 +21,7 @@ Commands:
 
 ____________________________________________________________
  Got it. I've added this taboo:
-   [T][ ] read Bataille's Accursed Share
+   [T][ ] read bataille.ui.Bataille's Accursed Share
  Now you have 1 taboos in your ledger.
 ____________________________________________________________
 
@@ -39,7 +39,7 @@ ____________________________________________________________
 
 ____________________________________________________________
  Sacred Taboos in your ledger:
- 1.[T][ ] read Bataille's Accursed Share
+ 1.[T][ ] read bataille.ui.Bataille's Accursed Share
  2.[D][ ] finish ritual (by: midnight)
  3.[E][ ] philosophical discourse (from: 8pm to: 10pm)
 ____________________________________________________________
@@ -47,7 +47,7 @@ ____________________________________________________________
 
 ____________________________________________________________
  The limit has been crossed! This truth is now profaned:
-   [T][X] read Bataille's Accursed Share
+   [T][X] read bataille.ui.Bataille's Accursed Share
  Another ritual completed. Another boundary crossed.
 ____________________________________________________________
 
@@ -66,7 +66,7 @@ ____________________________________________________________
 
 ____________________________________________________________
  Sacred Taboos in your ledger:
- 1.[T][X] read Bataille's Accursed Share
+ 1.[T][X] read bataille.ui.Bataille's Accursed Share
  2.[D][ ] finish ritual (by: midnight)
  3.[E][ ] philosophical discourse (from: 8pm to: 10pm)
  4.[T][ ] contemplate the sacred
