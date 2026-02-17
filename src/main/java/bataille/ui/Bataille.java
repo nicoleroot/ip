@@ -190,6 +190,25 @@ public class Bataille {
         }
     }
 
+    public static void handleDeletion(String input) throws BatailleException {
+        int deletionLength = 7;
+        try {
+            int index = Integer.parseInt(input.substring(deletionLength).trim());
+            if (index < 1 || index > storedTasks.size()) {
+                throw new BatailleException("No such taboo exists. The number must be between 1 and " + storedTasks.size() + ".");
+            }
+
+            Task removed = storedTasks.remove(index - 1);
+            printLine();
+            System.out.println(" The void consumes it. Noted. I've removed this taboo:");
+            System.out.println("   " + removed.toString());
+            System.out.println(" Now you have " + storedTasks.size() + " taboos in the list.");
+            printLine();
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            throw new BatailleException("Identify the taboo by its number to delete it.");
+        }
+    }
+
     public static void handleError(String input) throws BatailleException {
         throw new BatailleException("I don't understand this ritual. Speak clearly.");
     }
