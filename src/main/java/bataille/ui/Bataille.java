@@ -1,5 +1,6 @@
 package bataille.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import bataille.task.Task;
@@ -9,16 +10,14 @@ import bataille.task.ToDo;
 import bataille.exception.BatailleException;
 
 public class Bataille {
-    private static final int MAX_ITEMS = 100;
-    private static Task[] storedTasks = new Task[MAX_ITEMS];
-    private static int count = 0;
+    private static ArrayList<Task> storedTasks = new ArrayList<>();
 
     public static void printLine() {
         String line = "____________________________________________________________";
         System.out.println(line);
     }
 
-    public static void opening() {
+    public static void printOpening() {
         System.out.println(" ____________________________________");
         System.out.println("|     I AM THE ACCURSED SHARE        |");
         System.out.println("|     I AM WHAT SOCIETY EXPELS       |");
@@ -35,13 +34,14 @@ public class Bataille {
         System.out.println("'list' - View all taboos");
         System.out.println("'profane X' - Violate taboo X");
         System.out.println("'restore X' - Restore taboo X");
+        System.out.println("'delete X' - Erase taboo X from existence");
         System.out.println("'todo <taboo>' - Add a simple taboo");
         System.out.println("'deadline <taboo> /by <time>' - Add a taboo with deadline");
         System.out.println("'event <taboo> /from <time> /to <time>' - Add a taboo with duration");
         System.out.println("'bye' - Leave this sacred space");
     }
 
-    public static void closing() {
+    public static void printClosing() {
         printLine();
         System.out.println("We part at the threshold of the impossible.");
         System.out.println("Remember: to live is to die continuously.");
@@ -52,51 +52,45 @@ public class Bataille {
     public static void printInput() {
         printLine();
         System.out.println(" Sacred Taboos in your ledger: ");
-        if (count == 0) {
+        if (storedTasks.isEmpty()) {
             System.out.println(" The void stares back at you. No truths dared spoken yet.");
         } else {
-            for (int i = 0; i < count; i++) {
-                Task task = storedTasks[i];
-                System.out.println(" " + (i + 1) + "." + task.toString());
+            for (int i = 0; i < storedTasks.size(); i++) {
+                System.out.println(" " + (i + 1) + "." + storedTasks.get(i).toString());
             }
         }
         printLine();
     }
 
     public static void markTask(int index, boolean isDone) throws BatailleException {
-        if (index < 1 || index > count) {
-            throw new BatailleException("No such taboo exists in the sacred order. The number must be between 1 and " + count + ".");
+        if (index < 1 || index > storedTasks.size()) {
+            throw new BatailleException("No such taboo exists. The number must be between 1 and " + storedTasks.size() + ".");
         }
 
-        Task task = storedTasks[index - 1];
+        Task task = storedTasks.get(index - 1);
         if (isDone) {
             task.markAsDone();
         } else {
             task.markAsUndone();
         }
         String action = isDone ? "profaned" : "restored to sacred";
-        String philosophicalReflection = isDone ?
+        String reflection = isDone ?
                 "Another ritual completed. Another boundary crossed." :
                 "The task returns to its potential state. Unfinished, like all existence.";
 
         printLine();
         System.out.println(" The limit has been crossed! This truth is now " + action + ": ");
         System.out.println("   " + task.toString());
-        System.out.println(" " + philosophicalReflection);
+        System.out.println(" " + reflection);
         printLine();
     }
 
-    public static void addTask(Task task) throws BatailleException {
-        if (count >= MAX_ITEMS) {
-            throw new BatailleException("The ledger is full. No more truths can be inscribed. " +
-                    "Maximum " + MAX_ITEMS + " taboos allowed.");
-        }
-        storedTasks[count] = task;
-        count++;
+    public static void addTask(Task task) {
+        storedTasks.add(task);
         printLine();
         System.out.println(" Got it. I've added this taboo:");
         System.out.println("   " + task.toString());
-        System.out.println(" Now you have " + count + " taboos in your ledger.");
+        System.out.println(" Now you have " + storedTasks.size() + " taboos in your ledger.");
         printLine();
     }
 
@@ -235,13 +229,13 @@ public class Bataille {
         boolean isActive = true;
         Scanner in = new Scanner(System.in);
 
-        opening();
+        printOpening();
 
         while (isActive) {
             String input = in.nextLine().trim();
 
             if (input.equalsIgnoreCase("bye")) {
-                closing();
+                printClosing();
                 isActive = false;
             } else {
                 try {
