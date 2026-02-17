@@ -2,6 +2,12 @@ package bataille.ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import bataille.task.Task;
 import bataille.task.Deadline;
@@ -11,6 +17,84 @@ import bataille.exception.BatailleException;
 
 public class Bataille {
     private static ArrayList<Task> storedTasks = new ArrayList<>();
+
+    private static final Path DIR_PATH = Paths.get(".", "data");
+    private static final Path FILE_PATH = Paths.get(".", "data", "bataille.txt");
+
+    public static void loadData() {
+        if (Files.notExists(FILE_PATH)) {
+            return;
+        }
+
+        try {
+            List<String> lines = Files.readAllLines(FILE_PATH);
+            for (String line : lines) {
+                try {
+                    storedTasks.add(parseLineToTask(line));
+                } catch (Exception e) {
+                    System.err.println(" A corrupted taboo was found in the ledger. It has been purged.");
+                }
+            }
+        } catch (IOException e) {
+            System.err.println(" The void resisted reading. The sacred ledger is inaccessible.");
+        }
+    }
+
+    private static Task parseLineToTask(String line) throws BatailleException {
+        String[] parts = line.split(" \\| ");
+        String type = parts[0];
+        boolean isDone = parts[1].equals("1");
+        String description = parts[2];
+
+        Task task;
+        switch (type) {
+        case "T":
+            task = new ToDo(description);
+            break;
+        case "D":
+            task = new Deadline(description, parts[3]);
+            break;
+        case "E":
+            task = new Event(description, parts[3], parts[4]);
+            break;
+        default:
+            throw new BatailleException("Unknown ritual type.");
+        }
+
+        if (isDone) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
+    public static void saveData() {
+        try {
+            if (Files.notExists(DIR_PATH)) {
+                Files.createDirectories(DIR_PATH);
+            }
+
+            List<String> lines = new ArrayList<>();
+            for (Task t : storedTasks) {
+                lines.add(formatTaskForFile(t));
+            }
+            Files.write(FILE_PATH, lines);
+        } catch (IOException e) {
+            System.err.println("!! Failed to inscribe truths to the stone. Check disk permissions.");
+        }
+    }
+
+    private static String formatTaskForFile(Task t) {
+        String type = (t instanceof ToDo) ? "T" : (t instanceof Deadline) ? "D" : "E";
+        String status = t.isDone() ? "1" : "0";
+        String fileInput = type + " | " + status + " | " + t.getDescription();
+
+        if (t instanceof Deadline) {
+            fileInput += " | " + ((Deadline) t).getBy();
+        } else if (t instanceof Event) {
+            fileInput += " | " + ((Event) t).getFrom() + " | " + ((Event) t).getTo();
+        }
+        return fileInput;
+    }
 
     public static void printLine() {
         String line = "____________________________________________________________";
@@ -83,6 +167,7 @@ public class Bataille {
         System.out.println("   " + task.toString());
         System.out.println(" " + reflection);
         printLine();
+        saveData();
     }
 
     public static void addTask(Task task) {
@@ -92,6 +177,7 @@ public class Bataille {
         System.out.println("   " + task.toString());
         System.out.println(" Now you have " + storedTasks.size() + " taboos in your ledger.");
         printLine();
+        saveData();
     }
 
     public static void handleToDo(String input) throws BatailleException {
@@ -198,6 +284,7 @@ public class Bataille {
             System.out.println("   " + removed.toString());
             System.out.println(" Now you have " + storedTasks.size() + " taboos in the list.");
             printLine();
+            saveData();
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             throw new BatailleException("Identify the taboo by its number to delete it.");
         }
@@ -220,7 +307,9 @@ public class Bataille {
             handleDeadline(input);
         } else if (input.toLowerCase().startsWith("event ")) {
             handleEvent(input);
-        } else {
+        } else if (input.toLowerCase().startsWith("delete ")) {
+            handleDeletion(input);
+        }else {
             handleError(input);
         }
     }
@@ -229,6 +318,7 @@ public class Bataille {
         boolean isActive = true;
         Scanner in = new Scanner(System.in);
 
+        loadData();
         printOpening();
 
         while (isActive) {
