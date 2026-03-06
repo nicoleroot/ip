@@ -93,18 +93,36 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays a confirmation message after a task has been added.
+     *
+     * @param task The task that was added.
+     * @param totalCount The new total number of tasks in the list.
+     */
     public void showTaskAdded(Task task, int totalCount) {
         System.out.println(" Got it. I've added this taboo:");
         System.out.println("   " + task.toString());
         System.out.println(" Now you have " + totalCount + " taboos in your ledger.");
     }
 
+    /**
+     * Displays a confirmation message after a task has been deleted.
+     *
+     * @param task The task that was deleted.
+     * @param totalCount The new total number of tasks remaining.
+     */
     public void showTaskDeleted(Task task, int totalCount) {
         System.out.println(" The void consumes it. Noted. I've removed this taboo:");
         System.out.println("   " + task.toString());
         System.out.println(" Now you have " + totalCount + " taboos in the list.");
     }
 
+    /**
+     * Displays a confirmation message after a task's completion status has been changed.
+     *
+     * @param task The task whose status was changed.
+     * @param isDone true if the task was marked as done, false if marked as not done.
+     */
     public void showTaskMarked(Task task, boolean isDone) {
         String action = isDone ? "profaned" : "restored to sacred";
         String reflection = isDone
@@ -115,6 +133,12 @@ public class Ui {
         System.out.println(" " + reflection);
     }
 
+    /**
+     * Displays the results of a search operation.
+     * Shows all tasks that match the search criteria, or a message if none found.
+     *
+     * @param matches The list of tasks that matched the keyword.
+     */
     public void showFound(List<Task> matches) {
         if (matches.isEmpty()) {
             System.out.println(" The void yields nothing. No matching taboos found.");
