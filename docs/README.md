@@ -12,7 +12,7 @@
 2. Download the latest release
 3. Run it:
    ```
-   java -jar bataille.jar
+   java -jar "ip.jar"
    ```
 
 
