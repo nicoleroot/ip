@@ -6,9 +6,6 @@ import bataille.task.Task;
 import bataille.tasklist.TaskList;
 import bataille.ui.Ui;
 
-// ─────────────────────────────────────────────
-// AddDeadlineCommand
-// ─────────────────────────────────────────────
 public class AddDeadlineCommand extends Command {
 	private final String description;
 	private final String by;
@@ -19,7 +16,7 @@ public class AddDeadlineCommand extends Command {
 	}
 
 	@Override
-	public void execute(TaskList tasks, Ui ui, Storage storage) {
+	public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
 		Task task = new Deadline(description, by);
 		tasks.add(task);
 		ui.showTaskAdded(task, tasks.size());

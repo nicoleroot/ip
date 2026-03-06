@@ -6,9 +6,6 @@ import bataille.task.ToDo;
 import bataille.tasklist.TaskList;
 import bataille.ui.Ui;
 
-// ─────────────────────────────────────────────
-// AddToDoCommand
-// ─────────────────────────────────────────────
 public class AddToDoCommand extends Command {
 	private final String description;
 
@@ -17,7 +14,7 @@ public class AddToDoCommand extends Command {
 	}
 
 	@Override
-	public void execute(TaskList tasks, Ui ui, Storage storage) {
+	public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
 		Task task = new ToDo(description);
 		tasks.add(task);
 		ui.showTaskAdded(task, tasks.size());

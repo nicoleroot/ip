@@ -6,9 +6,6 @@ import bataille.task.Task;
 import bataille.tasklist.TaskList;
 import bataille.ui.Ui;
 
-// ─────────────────────────────────────────────
-// AddEventCommand
-// ─────────────────────────────────────────────
 public class AddEventCommand extends Command {
 	private final String description;
 	private final String from;
@@ -21,7 +18,7 @@ public class AddEventCommand extends Command {
 	}
 
 	@Override
-	public void execute(TaskList tasks, Ui ui, Storage storage) {
+	public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
 		Task task = new Event(description, from, to);
 		tasks.add(task);
 		ui.showTaskAdded(task, tasks.size());
