@@ -42,6 +42,7 @@ public class Ui {
         System.out.println("'deadline <taboo> /by <time>' - Add a taboo with deadline");
         System.out.println("'event <taboo> /from <time> /to <time>' - Add a taboo with duration");
         System.out.println("'bye' - Leave this sacred space");
+        System.out.println("<time> pattern: yyyy-MM-dd HHmm or MMM dd yyyy, h:mma");
     }
 
     public void printGoodbye() {
