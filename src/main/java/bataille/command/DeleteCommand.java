@@ -6,9 +6,6 @@ import bataille.task.Task;
 import bataille.tasklist.TaskList;
 import bataille.ui.Ui;
 
-// ─────────────────────────────────────────────
-// DeleteCommand
-// ─────────────────────────────────────────────
 public class DeleteCommand extends Command {
 	private final int index;
 
@@ -17,7 +14,7 @@ public class DeleteCommand extends Command {
 	}
 
 	@Override
-	public void execute(TaskList tasks, Ui ui, Storage storage) throws BatailleException {
+	public void executeCommand(TaskList tasks, Ui ui, Storage storage) throws BatailleException {
 		Task removed = tasks.remove(index);
 		ui.showTaskDeleted(removed, tasks.size());
 		storage.saveData(tasks.getAll());
