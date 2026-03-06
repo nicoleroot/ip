@@ -6,6 +6,9 @@ import bataille.task.ToDo;
 import bataille.tasklist.TaskList;
 import bataille.ui.Ui;
 
+/**
+ * Creates a todo object and adds it to the task list
+ */
 public class AddToDoCommand extends Command {
 	private final String description;
 

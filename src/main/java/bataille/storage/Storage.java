@@ -18,11 +18,24 @@ public class Storage {
 	private final Path filePath;
 	private final Path dirPath;
 
+	/**
+	 * Constructs a new Storage instance with the specified file path.
+	 * Creates the necessary directory structure if it doesn't exist.
+	 *
+	 * @param filePathStr The string representation of the file path where tasks will be stored.
+	 */
 	public Storage(String filePathStr) {
 		this.filePath = Paths.get(filePathStr);
 		this.dirPath = this.filePath.getParent();
 	}
 
+	/**
+	 * Loads tasks from the storage file.
+	 * If the file doesn't exist, returns an empty list.
+	 *
+	 * @return A list of tasks loaded from the file, or an empty list if file doesn't exist.
+	 * @throws BatailleException If there's an I/O error reading the file.
+	 */
 	public List<Task> loadData() throws BatailleException {
 		List<Task> tasks = new ArrayList<>();
 
@@ -46,6 +59,12 @@ public class Storage {
 		return tasks;
 	}
 
+	/**
+	 * Saves the provided list of tasks to the storage file.
+	 * Creates the directory structure if it doesn't exist.
+	 *
+	 * @param tasks The list of tasks to be saved to disk.
+	 */
 	public void saveData(List<Task> tasks) {
 		try {
 			if (dirPath != null && Files.notExists(dirPath)) {
@@ -61,6 +80,13 @@ public class Storage {
 		}
 	}
 
+	/**
+	 * Parses a single line from the storage file into a Task object.
+	 *
+	 * @param line The line string from the storage file.
+	 * @return A Task object of the appropriate type (ToDo, Deadline, or Event).
+	 * @throws BatailleException If the line format is invalid or unknown task type.
+	 */
 	private Task parseLineToTask(String line) throws BatailleException {
 		String[] parts = line.split(" \\| ");
 		String type = parts[0];
@@ -88,6 +114,12 @@ public class Storage {
 		return task;
 	}
 
+	/**
+	 * Formats a Task object into a string suitable for file storage.
+	 *
+	 * @param t The task to be formatted.
+	 * @return A formatted string representation of the task for file storage.
+	 */
 	private String formatTaskForFile(Task t) {
 		String type = (t instanceof ToDo) ? "T" : (t instanceof Deadline) ? "D" : "E";
 		String status = t.isDone() ? "1" : "0";

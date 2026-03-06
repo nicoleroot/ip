@@ -14,6 +14,13 @@ import bataille.exception.BatailleException;
 
 public class Parser {
 
+	/**
+	 * Parses the user's input string and returns the appropriate Command object.
+	*
+	 * @param input The raw user input string to be parsed.
+	 * @return A Command object corresponding to the user's input.
+	 * @throws BatailleException If the input is invalid or cannot be parsed properly.
+	 */
 	public static Command parse(String input) throws BatailleException {
 		String lower = input.toLowerCase();
 
@@ -40,6 +47,13 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Parses a "todo" command and creates an AddToDoCommand.
+	 *
+	 * @param input The raw user input starting with "todo".
+	 * @return An AddToDoCommand containing the parsed description.
+	 * @throws BatailleException If the description is missing or empty.
+	 */
 	private static Command parseToDo(String input) throws BatailleException {
 		int todoLength = 5;
 		if (input.length() <= todoLength) {
@@ -58,6 +72,14 @@ public class Parser {
 		return new AddToDoCommand(description);
 	}
 
+	/**
+	 * Parses a "deadline" command and creates an AddDeadlineCommand.
+	 * Validates the presence of "/by".
+	 *
+	 * @param input The raw user input starting with "deadline".
+	 * @return An AddDeadlineCommand containing the parsed description and due date.
+	 * @throws BatailleException If the format is invalid or required fields are missing.
+	 */
 	private static Command parseDeadline(String input) throws BatailleException {
 		int deadlineLength = 9;
 		int byLength = 4;
@@ -86,6 +108,14 @@ public class Parser {
 		return new AddDeadlineCommand(description, by);
 	}
 
+	/**
+	 * Parses an "event" command and creates an AddEventCommand.
+	 * Validates the presence of both "/from" and "/to".
+	 *
+	 * @param input The raw user input starting with "event".
+	 * @return An AddEventCommand containing the parsed description, start time, and end time.
+	 * @throws BatailleException If the format is invalid or required fields are missing.
+	 */
 	private static Command parseEvent(String input) throws BatailleException {
 		int eventLength = 6;
 		int fromLength = 6;
@@ -123,6 +153,16 @@ public class Parser {
 		return new AddEventCommand(description, from, to);
 	}
 
+	/**
+	 * Parses "profane" and "restore" commands and creates a MarkCommand.
+	 * Extracts the task index and determines whether to mark as done or not done.
+	 *
+	 * @param input The raw user input starting with "profane" or "restore".
+	 * @param prefixLen The length of the command prefix.
+	 * @param isDone true for "profane" (mark as done), false for "restore" (mark as not done).
+	 * @return A MarkCommand containing the task index and completion status.
+	 * @throws BatailleException If the index is missing or not a valid number.
+	 */
 	private static Command parseMark(String input, int prefixLen, boolean isDone)
 			throws BatailleException {
 		if (input.length() <= prefixLen) {
@@ -140,6 +180,14 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Parses a "delete" command and creates a DeleteCommand.
+	 * Extracts the task index of the item to be deleted.
+	 *
+	 * @param input The raw user input starting with "delete".
+	 * @return A DeleteCommand containing the task index to delete.
+	 * @throws BatailleException If the index is missing, invalid, or out of bounds.
+	 */
 	private static Command parseDelete(String input) throws BatailleException {
 		int deletionLength = 7;
 		try {
@@ -150,6 +198,14 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * Parses a "find" command and creates a FindCommand.
+	 * Extracts the keyword to search for in task descriptions.
+	 *
+	 * @param input The raw user input starting with "find".
+	 * @return A FindCommand containing the keyword to search for.
+	 * @throws BatailleException If the keyword is missing or empty.
+	 */
 	private static Command parseFind(String input) throws BatailleException {
 		int findLength = 4;
 		if (input.length() <= findLength) {

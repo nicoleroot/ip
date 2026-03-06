@@ -6,6 +6,9 @@ import bataille.task.Task;
 import bataille.tasklist.TaskList;
 import bataille.ui.Ui;
 
+/**
+ * Creates an Event object and adds it to the task list
+ */
 public class AddEventCommand extends Command {
 	private final String description;
 	private final String from;

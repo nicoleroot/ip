@@ -6,6 +6,9 @@ import bataille.task.Task;
 import bataille.tasklist.TaskList;
 import bataille.ui.Ui;
 
+/**
+ * Creates a Deadline object and adds it to the task list
+ */
 public class AddDeadlineCommand extends Command {
 	private final String description;
 	private final String by;
