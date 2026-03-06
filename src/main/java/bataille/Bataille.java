@@ -32,7 +32,7 @@ public class Bataille {
 				String fullCommand = ui.readCommand();
 				ui.printLine();
 				Command c = Parser.parse(fullCommand);
-				c.execute(tasks, ui, storage);
+				c.executeCommand(tasks, ui, storage);
 				isExit = c.isExit();
 			} catch (BatailleException e) {
 				ui.printError(e.getMessage());
