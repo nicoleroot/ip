@@ -6,4 +6,7 @@ profane 1
 restore 2
 todo contemplate the sacred
 list
+find ritual
+delete 2
+list
 bye
