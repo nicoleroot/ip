@@ -54,6 +54,14 @@ public class TaskList {
 		return tasks;
 	}
 
+	/**
+	 * Marks or unmarks a task at the specified index as done.
+	 * Uses 1-based indexing.
+	 *
+	 * @param index The position of the task to modify.
+	 * @param isDone true to mark as done, false to mark as not done.
+	 * @throws BatailleException If the index is out of bounds.
+	 */
 	public void markTask(int index, boolean isDone) throws BatailleException {
 		Task task = get(index);
 		if (isDone) {
@@ -63,6 +71,12 @@ public class TaskList {
 		}
 	}
 
+	/**
+	 * Validates that the given index is within the valid range.
+	 *
+	 * @param index The index to validate.
+	 * @throws BatailleException If the index is out of bounds.
+	 */
 	private void validateIndex(int index) throws BatailleException {
 		if (index < 1 || index > tasks.size()) {
 			throw new BatailleException(
