@@ -14,6 +14,14 @@ public class Event extends Task {
 	private final String rawFrom;
 	private final String rawTo;
 
+	/**
+	 * Constructs a new Event task with the specified description, start time, and end time.
+	 * Attempts to parse the time strings into LocalDateTime objects using INPUT_FORMAT.
+	 *
+	 * @param description The description of the event. Should not be null or empty.
+	 * @param from The start time of the event as a string.
+	 * @param to The end time of the event as a string.
+	 */
 	public Event(String description, String from, String to) {
 		super(description);
 

@@ -12,6 +12,13 @@ public class Deadline extends Task {
 	private final LocalDateTime by;
 	private final String rawBy;
 
+	/**
+	 * Constructs a new Deadline task with the specified description and due date.
+	 * Attempts to parse the time string into a LocalDateTime object using INPUT_FORMAT.
+	 *
+	 * @param description The description of the deadline task. Should not be null or empty.
+	 * @param by The due date/time of the deadline as a string.
+	 */
 	public Deadline(String description, String by) {
 		super(description);
 		LocalDateTime parsed = null;
