@@ -10,10 +10,20 @@ public class TaskList {
 
 	private final ArrayList<Task> tasks;
 
+	/**
+	 * Constructs an empty TaskList.
+	 * Creates a new ArrayList with no initial tasks.
+	 */
 	public TaskList() {
 		this.tasks = new ArrayList<>();
 	}
 
+	/**
+	 * Constructs a TaskList initialized with an existing list of tasks.
+	 * Creates a new ArrayList containing all tasks from the provided list.
+	 *
+	 * @param initialTasks A list of tasks to initialize the TaskList with.
+	 */
 	public TaskList(List<Task> initialTasks) {
 		this.tasks = new ArrayList<>(initialTasks);
 	}

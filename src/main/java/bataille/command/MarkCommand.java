@@ -14,6 +14,14 @@ public class MarkCommand extends Command {
 		this.isDone = isDone;
 	}
 
+	/**
+	 * Executes the mark command by changing a task's completion status.
+	 *
+	 * @param tasks The current task list containing the task to modify.
+	 * @param ui The user interface.
+	 * @param storage The storage handler for saving the updated task list.
+	 * @throws BatailleException If the index is invalid or if there's an error during storage operations.
+	 */
 	@Override
 	public void executeCommand(TaskList tasks, Ui ui, Storage storage) throws BatailleException {
 		tasks.markTask(index, isDone);

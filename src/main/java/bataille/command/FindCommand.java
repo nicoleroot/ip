@@ -17,6 +17,14 @@ public class FindCommand extends Command {
 		this.keyword = keyword.toLowerCase();
 	}
 
+	/**
+	 * Executes the find command by searching through all tasks and displaying matches.
+	 *
+	 * @param tasks The current task list to search through.
+	 * @param ui The user interface for displaying the search results.
+	 * @param storage The storage handler.
+	 * @throws BatailleException This command does not throw exceptions under normal operation.
+	 */
 	@Override
 	public void executeCommand(TaskList tasks, Ui ui, Storage storage) throws BatailleException {
 		List<Task> matches = new ArrayList<>();

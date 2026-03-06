@@ -10,6 +10,9 @@ public class Ui {
     private static final String LINE = "____________________________________________________________";
     private final Scanner scanner;
 
+	/**
+	 * Start scanning.
+	 */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
@@ -22,6 +25,9 @@ public class Ui {
         return scanner.nextLine().trim();
     }
 
+    /**
+     * Displays the welcome message and command instructions.
+     */
     public void printWelcome() {
         System.out.println(" ____________________________________");
         System.out.println("|     I AM THE ACCURSED SHARE        |");
@@ -46,20 +52,36 @@ public class Ui {
         System.out.println("<time> pattern: yyyy-MM-dd HHmm or MMM dd yyyy, h:mma");
     }
 
+    /**
+     * Displays the goodbye message when the user exits the application.
+     */
     public void printGoodbye() {
         System.out.println("We part at the threshold of the impossible.");
         System.out.println("Remember: to live is to die continuously.");
         System.out.println("Goodbye.");
     }
 
+    /**
+     * Prints an error message to the console.
+     *
+     * @param message The error message to display.
+     */
     public void printError(String message) {
         System.out.println(message);
     }
 
+    /**
+     * Prints a loading error message when tasks cannot be loaded from storage.
+     */
     public void printLoadingError() {
         System.err.println(" The void resisted reading. Starting with an empty ledger.");
     }
 
+    /**
+     * Displays the entire task list to the user.
+     *
+     * @param taskList The list of tasks to display.
+     */
     public void showTaskList(List<Task> taskList) {
         System.out.println(" Sacred Taboos in your ledger: ");
         if (taskList.isEmpty()) {
@@ -104,6 +126,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Closes the scanner resource.
+     * Should be called when the application is shutting down.
+     */
     public void close() {
         scanner.close();
     }
