@@ -27,18 +27,22 @@ public class Bataille {
 	public void run() {
 		ui.printWelcome();
 		boolean isExit = false;
-		while (!isExit) {
-			try {
-				String fullCommand = ui.readCommand();
-				ui.printLine();
-				Command c = Parser.parse(fullCommand);
-				c.executeCommand(tasks, ui, storage);
-				isExit = c.isExit();
-			} catch (BatailleException e) {
-				ui.printError(e.getMessage());
-			} finally {
-				ui.printLine();
+		try {
+			while (!isExit) {
+				try {
+					String fullCommand = ui.readCommand();
+					ui.printLine();
+					Command c = Parser.parse(fullCommand);
+					c.executeCommand(tasks, ui, storage);
+					isExit = c.isExit();
+				} catch (BatailleException e) {
+					ui.printError(e.getMessage());
+				} finally {
+					ui.printLine();
+				}
 			}
+		} finally {
+			ui.close();
 		}
 	}
 
