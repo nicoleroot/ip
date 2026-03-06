@@ -35,6 +35,7 @@ public class Ui {
         System.out.println("Speak to me of your darkest truths...");
         System.out.println("\nCommands:");
         System.out.println("'list' - View all taboos");
+        System.out.println("'find' - Find taboos from the ledger");
         System.out.println("'profane X' - Violate taboo X");
         System.out.println("'restore X' - Restore taboo X");
         System.out.println("'delete X' - Erase taboo X from existence");
@@ -90,6 +91,17 @@ public class Ui {
         System.out.println(" The limit has been crossed! This truth is now " + action + ": ");
         System.out.println("   " + task.toString());
         System.out.println(" " + reflection);
+    }
+
+    public void showFound(List<Task> matches) {
+        if (matches.isEmpty()) {
+            System.out.println(" The void yields nothing. No matching taboos found.");
+        } else {
+            System.out.println(" Here are the matching taboos in your ledger:");
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println(" " + (i + 1) + "." + matches.get(i).toString());
+            }
+        }
     }
 
     public void close() {

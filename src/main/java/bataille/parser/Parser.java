@@ -6,6 +6,7 @@ import bataille.command.AddToDoCommand;
 import bataille.command.Command;
 import bataille.command.DeleteCommand;
 import bataille.command.ExitCommand;
+import bataille.command.FindCommand;
 import bataille.command.ListCommand;
 import bataille.command.MarkCommand;
 import bataille.command.UnknownCommand;
@@ -32,6 +33,8 @@ public class Parser {
 			return parseMark(input, 8, false);
 		} else if (lower.startsWith("delete ")) {
 			return parseDelete(input);
+		} else if (lower.startsWith("find")) {
+			return parseFind(input);
 		} else {
 			return new UnknownCommand();
 		}
@@ -106,14 +109,10 @@ public class Parser {
 		String description = input.substring(eventLength, fromIndex).trim();
 
 		int fromContentStart = fromIndex + fromLength;
-		String from = (fromContentStart <= toIndex)
-				? input.substring(fromContentStart, toIndex).trim()
-				: "";
+		String from = (fromContentStart <= toIndex) ? input.substring(fromContentStart, toIndex).trim() : "";
 
 		int toContentStart = toIndex + toLength;
-		String to = (toContentStart <= input.length())
-				? input.substring(toContentStart).trim()
-				: "";
+		String to = (toContentStart <= input.length()) ? input.substring(toContentStart).trim() : "";
 
 		if (description.isEmpty() || from.isEmpty() || to.isEmpty()) {
 			throw new BatailleException(
@@ -127,22 +126,16 @@ public class Parser {
 	private static Command parseMark(String input, int prefixLen, boolean isDone)
 			throws BatailleException {
 		if (input.length() <= prefixLen) {
-			throw new BatailleException(isDone
-					? "You must specify which taboo to profane.\n" +
-					"Usage: profane <number>"
-					: "You must specify which taboo to restore.\n" +
-					"Usage: restore <number>"
+			throw new BatailleException(isDone ? "You must specify which taboo to profane.\n" + "Usage: profane <number>"
+					: "You must specify which taboo to restore.\n" + "Usage: restore <number>"
 			);
 		}
 		try {
 			int index = Integer.parseInt(input.substring(prefixLen).trim());
 			return new MarkCommand(index, isDone);
 		} catch (NumberFormatException e) {
-			throw new BatailleException(isDone
-					? "Invalid number format for profane command.\n" +
-					"Usage: profane <number>"
-					: "Invalid number format for restore command.\n" +
-					"Usage: restore <number>"
+			throw new BatailleException(isDone ? "Invalid number format for profane command.\n" + "Usage: profane <number>"
+					: "Invalid number format for restore command.\n" + "Usage: restore <number>"
 			);
 		}
 	}
@@ -155,5 +148,23 @@ public class Parser {
 		} catch (NumberFormatException | StringIndexOutOfBoundsException e) {
 			throw new BatailleException("Identify the taboo by its number to delete it.");
 		}
+	}
+
+	private static Command parseFind(String input) throws BatailleException {
+		int findLength = 4;
+		if (input.length() <= findLength) {
+			throw new BatailleException(
+					"You must specify a taboo to search for.\n" +
+					"Usage: find <keyword>"
+			);
+		}
+		String keyword = input.substring(findLength).trim();
+		if (keyword.isEmpty()) {
+			throw new BatailleException(
+					"You must specify a taboo to search for.\n" +
+					"Usage: find <keyword>"
+			);
+		}
+		return new FindCommand(keyword);
 	}
 }
